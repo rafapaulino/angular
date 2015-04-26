@@ -1,0 +1,45 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+</head>
+<body>
+
+  <div ng-controller="CtrlApp">
+    <h1>{{nome}}, {{idade}} anos</h1>
+    <p><input type="text" ng-model="nome"></p>
+  </div>
+
+  <div ng-controller="CtrlApp2">
+    <h2>{{cidade}}, {{pais}}</h2>
+  </div>
+
+<script>
+(function(angular){
+    'use strict';
+    //cria a aplicacao
+    var myApp = angular.module('myApp',[]);
+    //cria o controller
+    myApp.controller('CtrlApp',function($scope){
+
+        $scope.nome = "Rafael";
+        $scope.idade = 31;
+
+        //criando um watch - funciona como um event listener
+        $scope.$watch('nome',function (){
+            console.log($scope.nome);
+        });
+    });
+
+    //cria o segundo controller
+    myApp.controller('CtrlApp2',function($scope){
+
+        $scope.cidade = "São Paulo";
+        $scope.pais = "Brasil";
+    });
+
+})(window.angular);
+</script>
+</body>
+</html>

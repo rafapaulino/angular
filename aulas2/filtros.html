@@ -1,0 +1,54 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Filtros</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+</head>
+<body>
+
+  <div ng-controller="CtrlApp">
+    <h1>{{nome | case: 'upper'}}</h1>
+  </div>
+
+<script>
+(function(angular){
+    'use strict';
+    //cria a aplicacao
+    var myApp = angular.module('myApp',[]);
+    
+    //criacao  filtro
+    myApp.filter('upper', function() {
+          return function(input) {
+             return input.toUpperCase();
+          }
+    });
+
+    //criacao  filtro
+    myApp.filter('lower', function() {
+          return function(input) {
+             return input.toLowerCase();
+          }
+    });
+
+
+    //criacao filtro com valores
+    myApp.filter('case', function() {
+          return function(input, tipo) {
+             if (tipo === 'lower') {
+                return input.toLowerCase();
+             } else {
+                return input.toUpperCase();
+             }
+          }
+    });
+
+    //cria o controller
+    myApp.controller('CtrlApp',function($scope){
+
+        $scope.nome = "Rafael";
+    });
+})(window.angular);
+</script>
+</body>
+</html>

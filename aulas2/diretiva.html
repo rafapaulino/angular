@@ -1,0 +1,66 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Diretivas</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+</head>
+<body>
+
+  <div ng-controller="CtrlApp">
+    
+    <button son-click="executa();">Clique</button>
+    <son-click2 click="executa();">Clique 2</son-click2>
+  </div>
+
+<script>
+(function(angular){
+    'use strict';
+    //cria a aplicacao
+    var myApp = angular.module('myApp',[]);
+    
+    //criacao de diretiva
+    myApp.directive('sonClick', function() {
+          
+          return {
+              restrict: 'A', //trabalha como um atributo
+              link: function (scope, element, attrs) {
+
+                  element.bind('click', function() {
+                      scope.$eval(attrs.sonClick);
+                  });
+              }
+          };
+    });
+
+    //criacao de diretiva
+    myApp.directive('sonClick2', function() {
+          
+          return {
+              restrict: 'E', //trabalha como um elemento
+              replace: true,
+              transclude: true,
+              template: '<button ng-transclude></button>',
+              link: function (scope, element, attrs) {
+
+                  element.bind('click', function() {
+                      scope.$eval(attrs.click);
+                  });
+              }
+          };
+    });
+
+    //cria o controller
+    myApp.controller('CtrlApp',function($scope){
+
+        $scope.nome = "Rafael";
+
+        $scope.executa = function() {
+
+            alert('Diretiva Clicada');
+        }
+    });
+})(window.angular);
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+</head>
+<body>
+
+  <div ng-controller="CtrlApp">
+    <h1>{{nome}}, {{idade}} anos</h1>
+    <p><input type="text" ng-model="nome" ng-change="loggar();"></p>
+  </div>
+
+<script>
+(function(angular){
+    'use strict';
+    //cria a aplicacao
+    var myApp = angular.module('myApp',[]);
+    //cria o controller
+    myApp.controller('CtrlApp',function($scope){
+
+        $scope.nome = "Rafael";
+        $scope.idade = 31;
+
+        $scope.loggar = function() {
+            console.log($scope.nome);
+        };
+
+    });
+})(window.angular);
+</script>
+</body>
+</html>
